@@ -1,74 +1,71 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Result } from '../../marvel/interfaces/comic.interfaces';
 
-interface ComicPrice{
-  type?:string;
-  price?:string;
+interface ComicPrice {
+  type?: string;
+  price?: string;
 }
 
-interface Thumbnail{
-  path?:string;
-  extension?:string;
+interface Thumbnail {
+  path?: string;
+  extension?: string;
 }
-interface ComicSale{
-  id:String;
-  title?:String;
-  prices:ComicPrice[];
-  pathImg:Thumbnail;
+interface ComicSale {
+  id: String;
+  title?: String;
+  prices: ComicPrice[];
+  pathImg: Thumbnail;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class CartService {
+export class CartService implements OnInit {
 
   constructor() {
-    this.getCart();
-   }
-
-  ngOnInit(): void {
+    this._cart = JSON.parse(localStorage.getItem('cart')!)
   }
 
+  ngOnInit(): void { }
 
-  public cart:any[]=[];
-  getCart(){
-    if(localStorage.getItem('cart')){
-      return JSON.parse(localStorage.getItem('cart')||'');
-    }
+  private _cart: any[] = [];
+
+  public get cart(): any {
+    return this._cart;
   }
 
-  deleteItem(itemDelete:any){
-    console.log(itemDelete.id)
-    this.cart = this.cart.filter(item=>{
+  deleteItem(itemDelete: any) {
+    this._cart = this._cart.filter(item => {
       return itemDelete.id != item.id
     })
-    localStorage.setItem('cart',JSON.stringify(this.cart))
-    console.log(this.cart)
+    localStorage.setItem('cart', JSON.stringify(this._cart))
+
+    console.log(this.cart);
+    
   }
 
-  addToCart(comic:Result){
+  addToCart(comic: Result) {
 
-    let item = this.cart.find(item=>{
-      return comic.id === item.id 
+    let item = this._cart.find(item => {
+      return comic.id === item.id
     });
 
-    if(item){
+    if (item) {
       window.alert('is alreadt added!');
       return;
     }
 
 
-    let comicSale:ComicSale = {
-      id : comic.id!,
-      title:comic.title,
+    let comicSale: ComicSale = {
+      id: comic.id!,
+      title: comic.title,
       prices: comic.prices!,
       pathImg: comic.thumbnail!
     }
-    this.cart.push(comicSale);
+    this._cart.push(comicSale);
     window.alert(`Comic added ${comicSale.title}`)
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    console.log(this.cart)
+    localStorage.setItem('cart', JSON.stringify(this._cart));
+    console.log(this._cart)
 
   }
 }
