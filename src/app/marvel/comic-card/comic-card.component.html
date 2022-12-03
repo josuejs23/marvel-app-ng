@@ -1,0 +1,13 @@
+<div class="comic-card">
+    <img [src]="image" alt=""/>
+    <div class="comic-details">
+        <h3>{{comic.title}}</h3>
+        <p class="comic-description">{{comic.description!}}</p>
+        <br>
+        <p>Print Price: {{comic.prices![0].price | currency }}</p>
+        <p>Digital Price: {{comic.prices![0].price | currency}}</p>
+        <!-- <app-comic-details [comic]="comic"></app-comic-details> -->
+        <button (click)="addToCart(comic)" class="btn btn-primary">Add</button>
+    </div>
+    
+</div>

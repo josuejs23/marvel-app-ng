@@ -98,10 +98,14 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "bdf6c6e3-41c0-4553-9e77-af94c9863cfa"
   }
 }

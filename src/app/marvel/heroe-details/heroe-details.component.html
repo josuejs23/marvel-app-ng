@@ -1,0 +1,21 @@
+<div class="heroe-details" *ngIf="character">
+    <img [src]="imgCharacter" alt="" srcset="">
+    <div class="info p-2">
+        <h2 class="description-character">{{character![0].name}}</h2>
+        <br>
+        <p class="description-character" *ngIf="character![0].description; else noBio">Bio: {{character![0].description}}</p>
+        <ng-template #noBio>
+            <p class="description-character">Bio: No bio</p>
+        </ng-template>
+        <br>
+        <div class="comics-compilation">
+            <!-- Comics: <a [routerLink]="['comics']">{{character![0].comics!.available}}</a>  -->
+            Comics: <a [routerLink]="['../../comics-list',character![0].id]">{{character![0].comics!.available}}</a> 
+            Series: {{character![0].series!.available}}
+            Events: {{character![0].events!.available}}
+            Stories: {{character![0].stories!.available}}
+        </div>
+    </div>   
+</div>
+
+<app-comic-list></app-comic-list>
