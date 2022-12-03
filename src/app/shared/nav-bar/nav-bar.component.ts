@@ -10,15 +10,19 @@ import { CartService } from '../../sales/services/cart.service';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-  cart = this._cartService.getCart();
+
+  get cart(): string {
+    return this._cartService.cart;
+  }
+
   constructor(
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _apiMarvelService: ApiMarvelService,
     private _cartService: CartService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   searchForm = this._formBuilder.group({
     name: '',

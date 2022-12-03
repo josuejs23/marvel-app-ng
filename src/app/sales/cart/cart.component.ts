@@ -8,28 +8,16 @@ import { CartService } from '../services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  public cart:any[] = []
-
-  constructor(private _cartService:CartService) {
-    // this.getCart();
-    this.cart = this._cartService.getCart();
-    console.log(this.cart)
-   }
-
-  ngOnInit(): void {
+  get cart() {
+    return this._cartService.cart;
   }
 
+  constructor(private _cartService: CartService) { }
 
-  // cart:any[]=[];
-  // getCart(){
-  //   this.cart = JSON.parse(localStorage.getItem('cart')!)
-  // }
+  ngOnInit(): void { }
 
-  deleteItem(itemDelete:any){
+  deleteItem(itemDelete: any) {
     this._cartService.deleteItem(itemDelete)
   }
-
-
-
 
 }
