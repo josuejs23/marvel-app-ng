@@ -6,26 +6,28 @@ import { ApiMarvelService } from '../services/api-marvel.service';
 @Component({
   selector: 'app-comic-list',
   templateUrl: './comic-list.component.html',
-  styleUrls: ['./comic-list.component.scss']
+  styleUrls: ['./comic-list.component.scss'],
 })
 export class ComicListComponent implements OnInit {
-
-  constructor( private apiMarvelService:ApiMarvelService, private _router:ActivatedRoute) { }
+  constructor(
+    private apiMarvelService: ApiMarvelService,
+    private _router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.getComicsByHeroeId()
+    this.getComicsByHeroeId();
   }
 
-  comicList?:Result[];
-  
-  getComicsByHeroeId(){
+  comicList?: Result[];
+
+  getComicsByHeroeId() {
     let characterId = this._router.snapshot.paramMap.get('heroeId');
-    // let characterId = this._router.snapshot.paramMap;
-    console.log('characterId',characterId)
-    this.apiMarvelService.getComicsByCharacterId(characterId!).subscribe((resp)=>{
-      this.comicList = resp.data?.results;
-      console.log(this?.comicList)
-    })
+    console.log('characterId', characterId);
+    this.apiMarvelService
+      .getComicsByCharacterId(characterId!)
+      .subscribe((resp) => {
+        this.comicList = resp.data?.results;
+        console.log(this?.comicList);
+      });
   }
-
 }

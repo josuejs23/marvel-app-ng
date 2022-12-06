@@ -2,7 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiMarvelService } from 'src/app/marvel/services/api-marvel.service';
-import { CartService } from '../../sales/services/cart.service';
+import { Cart, CartService } from '../../sales/services/cart.service';
+
+interface ComicPrice {
+  type?: string;
+  price?: string;
+}
+
+interface Thumbnail {
+  path?: string;
+  extension?: string;
+}
+
+interface ComicSale {
+  id: String;
+  title?: String;
+  prices: ComicPrice[];
+  pathImg: Thumbnail;
+}
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,9 +27,8 @@ import { CartService } from '../../sales/services/cart.service';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-
-  get cart(): string {
-    return this._cartService.cart;
+  get comics(): any {
+    return this._cartService.cart.comics;
   }
 
   constructor(
@@ -20,9 +36,11 @@ export class NavBarComponent implements OnInit {
     private _router: Router,
     private _apiMarvelService: ApiMarvelService,
     private _cartService: CartService
-  ) { }
+  ) {
+    console.log('Cart Service', this._cartService.cart?.comics);
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   searchForm = this._formBuilder.group({
     name: '',
