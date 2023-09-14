@@ -12,9 +12,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of cart">
-              <ng-container *ngIf="item">
+              <ng-container *ngIf="item; else emptycart">
                 <app-cart-item [item]="item"></app-cart-item>
               </ng-container>
+              <ng-template #emptycart>
+                <h2>There is not comic</h2>
+              </ng-template>
             </tr>
           </tbody>
         </table>
