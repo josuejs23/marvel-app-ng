@@ -1,0 +1,14 @@
+<td>
+  <div>
+    <span
+      (click)="deleteItem(1)"
+      class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger bg-danger"
+    >
+      x
+      <span class="visually-hidden">New alerts</span>
+    </span>
+    <img src="{{ item.pathImg.path }}/portrait_fantastic.jpg" alt="" />
+  </div>
+</td>
+<td>{{ item.title }}</td>
+<td>{{ item.prices[0].price }}</td>

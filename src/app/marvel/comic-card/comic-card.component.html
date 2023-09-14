@@ -1,16 +1,17 @@
-<div class="comic-card">
-    <img [src]="image" alt=""/>
-    <div class="comic-details">
-        <h3>{{comic.title | slice : 0:35 }}</h3>
-        <!-- <p class="comic-description">{{comic.description!}}</p> -->
-        <br>
-        <!-- Print price is at index 0, digital price is at index 1 -->
-        <p *ngIf=" comic.prices![0].price == '0.00'; else printPrice">Price: Free!</p>
-        <ng-template #printPrice>
-        <p>Price: {{comic.prices![0].price | currency }}</p> 
-        </ng-template >
-        <!-- <app-comic-details [comic]="comic"></app-comic-details> -->
-        <button (click)="addToCart(comic)" class="btn btn-primary">Add</button>
-    </div>
-    
+<div class="comic-card shadow-lg">
+  <img [src]="image" alt="" />
+  <div class="comic-details">
+    <h3>{{ comic.title | slice : 0 : 35 }}</h3>
+    <!-- <p class="comic-description">{{comic.description!}}</p> -->
+    <br />
+    <!-- Print price is at index 0, digital price is at index 1 -->
+    <p *ngIf="comic.prices![0].price == '0.00'; else printPrice">
+      Price: Free!
+    </p>
+    <ng-template #printPrice>
+      <p>Price: {{ comic.prices![0].price | currency }}</p>
+    </ng-template>
+    <!-- <app-comic-details [comic]="comic"></app-comic-details> -->
+    <button (click)="addToCart(comic)" class="btn btn-primary">Add</button>
+  </div>
 </div>

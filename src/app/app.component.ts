@@ -5,14 +5,12 @@ import { ApiMarvelService } from './marvel/services/api-marvel.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'marvelApp';
 
-  blue:string = 'blue'
+  blue: string = 'blue';
 
-  characters?:Result[];
-
-
+  characters?: Result[];
 }

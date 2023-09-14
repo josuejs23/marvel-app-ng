@@ -1,38 +1,28 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6">
-      <table class="table">
-        <thead class="table-light">
-          <tr>
-            <th>Comic</th>
-            <th>Title</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of cart">
-            <td>
-              <div class="d-inline-flex position-relative">
-                <span
-                  (click)="deleteItem(item)"
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger bg-danger"
-                >
-                  x
-                  <span class="visually-hidden">New alerts</span>
-                </span>
-                <img
-                  src="{{ item.pathImg.path }}/portrait_fantastic.jpg"
-                  alt=""
-                />
-              </div>
-            </td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.prices[0].price }}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container-fluid bg-primary">
+  <div class="row-cols-12">
+    <div class="row bg-danger">
+      <div class="col-md-6 flex-grow-1">
+        <table class="table">
+          <thead class="table-light">
+            <tr>
+              <th>Comic</th>
+              <th>Title</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cart">
+              <ng-container *ngIf="item">
+                <app-cart-item [item]="item"></app-cart-item>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 flex-grow-1">
+        Checkout
+        <span>Total a pagar {{ total | currency : "USD" }}</span>
+      </div>
     </div>
-    <div class="col-md-6">Checkout</div>
   </div>
 </div>
-<span>Total a pagar {{ total | currency : "USD" }}</span>
